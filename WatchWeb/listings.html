@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,5 +66,140 @@
         &copy; 2023 My Website. All rights reserved.
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfsYFIzKwT8T6V+0dFUssNYTup0s+Rf" crossorigin="anonymous"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings - My Simple Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        header { margin-bottom: 20px; }
+        .navbar { margin-bottom: 20px; }
+        .card { margin-bottom: 20px; }
+        footer { margin-top: 20px; padding: 20px 0; text-align: center; }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <h1>Listings</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Simple Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="listings.html">Listings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container">
+        <div class="row" id="watchList"></div>
+    </section>
+    <footer class="bg-light">
+        &copy; 2023 My Website. All rights reserved.
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyATTLXHrjxowvjDwokc8unc1bOc6veqdCw",
+            authDomain: "watchout-84cc5.firebaseapp.com",
+            databaseURL: "https://watchout-84cc5-default-rtdb.firebaseio.com",
+            projectId: "watchout-84cc5",
+            storageBucket: "watchout-84cc5.appspot.com",
+            messagingSenderId: "73851933764",
+            appId: "1:73851933764:web:54b79f1c6137923196d811"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const watchList = document.getElementById('watchList');
+        const watchesRef = ref(db, 'watches');
+
+        get(watchesRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const watchData = childSnapshot.val();
+                        const watchCard = createWatchCard(watchData);
+                        watchList.appendChild(watchCard);
+                    });
+                } else {
+                    console.log("No data available");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+
+        function createWatchCard(watchData) {
+            const col = document.createElement('div');
+            col.className = 'col-md-4';
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style = 'width: 18rem;';
+
+            const image = document.createElement('img');
+            image.className = 'card-img-top';
+            image.src = watchData.imageUrl;
+            image.alt = 'Watch Image';
+            card.appendChild(image);
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            const title = document.createElement('h5');
+            title.className = 'card-title';
+            title.textContent = watchData.name;
+            cardBody.appendChild(title);
+
+            const description = document.createElement('p');
+            description.className = 'card-text';
+            description.textContent = `Description: ${watchData.description}`;
+            cardBody.appendChild(description);
+
+            const price = document.createElement('p');
+            price.className = 'card-text';
+            price.textContent = `Price: $${watchData.price}`;
+            cardBody.appendChild(price);
+
+            const size = document.createElement('p');
+            size.className = 'card-text';
+            size.textContent = `Size: ${watchData.size}mm`;
+            cardBody.appendChild(size);
+
+            const material = document.createElement('p');
+            material.className = 'card-text';
+            material.textContent = `Material: ${watchData.material}`;
+            cardBody.appendChild(material);
+
+            card.appendChild(cardBody);
+            col.appendChild(card);
+            return col;
+        }
+    </script>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"></script> -->
 </body>
 </html>
