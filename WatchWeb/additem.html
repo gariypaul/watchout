@@ -4,83 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Add Item - My Simple Website</title> -->
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listings - My Simple Website</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <style>
-            header { margin-bottom: 20px; }
-            .navbar { margin-bottom: 20px; }
-            .card { margin-bottom: 20px; }
-            footer { margin-top: 20px; padding: 20px 0; text-align: center; }
-        </style>
-    </head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Add Item to Sell</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        header,
-        .container,
-        footer {
-            padding: 15px;
+        header {
+            margin-bottom: 20px;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
         }
 
         footer {
             margin-top: 20px;
+            padding: 20px 0;
             text-align: center;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .form-control {
-                width: 100%;
-                /* Full width on small screens */
-                margin-bottom: 10px;
-                /* Spacing after each input on smaller screens */
-            }
-
-            .form-control:not(textarea) {
-                max-width: 300px;
-                /* Limiting width for non-textarea inputs on small screens */
-            }
-        }
-
-        /* Limit input field width for larger screens */
-        .form-control:not(textarea) {
-            max-width: 400px;
-            /* Adjust this value as needed */
         }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">My Simple Website</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="home.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="listings.html">Listings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="additem.html">Add Item</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container">
+            <a class="navbar-brand" href="#">Add Item to Sell</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="listings.html">Listings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./SignIn.html">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="additem.html">Add Item</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-
+        </div>
     </nav>
     <section class="container">
         <h2 class="text-center mb-4">Add a New Watch Listing</h2>
