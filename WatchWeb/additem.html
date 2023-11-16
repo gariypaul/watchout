@@ -25,6 +25,10 @@
             padding: 20px 0;
             text-align: center;
         }
+
+        #log-out{
+        margin-left: auto;
+        }
     </style>
 </head>
 
@@ -51,6 +55,7 @@
                         <a class="nav-link" href="additem.html">Add Item</a>
                     </li>
                 </ul>
+                <button type="button" class="btn btn-dark" id="log-out" onclick="logout()">Log Out</button>
             </div>
         </div>
     </nav>
@@ -96,7 +101,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
         import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyATTLXHrjxowvjDwokc8unc1bOc6veqdCw",
@@ -159,6 +164,19 @@
                 document.getElementById("protected-content").style.display="none";
                 window.location.href='SignIn.html'
             }
+        });
+
+        function logout(){
+            signOut(auth).then(()=>{
+                alert("Logged out");
+                window.location.href="home.html";
+            }).catch((error)=>{
+                alert("Sign out error", error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', (event)=>{
+            document.getElementById("log-out").addEventListener('click', logout);
         });
 
     </script>
