@@ -112,6 +112,7 @@
                     const user = userCredential.user;
                     alert('User signed in!');
                     // Additional actions after successful sign-in
+                    window.location.href='home.html'
                 })
                 .catch((error) => {
                     const errorCode = error.code;
