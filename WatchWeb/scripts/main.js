@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getDatabase, ref, push, child, get, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getAuth} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
-import { getAuth,signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyATTLXHrjxowvjDwokc8unc1bOc6veqdCw",
@@ -12,26 +13,12 @@ const firebaseConfig = {
     messagingSenderId: "73851933764",
     appId: "1:73851933764:web:54b79f1c6137923196d811"
 };
-const app = initializeApp(firebaseConfig);
+//initialise and export app and databases data 
+export const app = initializeApp(firebaseConfig);
+export const db = getDatabase(app);
+export const storage = getStorage(app);
 
-const auth = getAuth();
-auth.onAuthStateChanged(function(user){
-    if(user){
-        document.getElementById("log-out").style.display="block";
-    }else{
-        document.getElementById("log-out").style.display="none";
-    }
-});
+//export firebase authenticator
+export const auth = getAuth();
 
-function logout(){
-    signOut(auth).then(()=>{
-        alert("Logged out");
-        window.location.href="home.html";
-    }).catch((error)=>{
-        alert("Sign out error", error);
-    });
-}
 
-document.addEventListener('DOMContentLoaded', (event)=>{
-    document.getElementById("log-out").addEventListener('click', logout);
-});
