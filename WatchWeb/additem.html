@@ -97,89 +97,9 @@
     <footer class="bg-light">
         &copy; 2023 My Website. All rights reserved.
     </footer>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
-        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
-        import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyATTLXHrjxowvjDwokc8unc1bOc6veqdCw",
-            authDomain: "watchout-84cc5.firebaseapp.com",
-            databaseURL: "https://watchout-84cc5-default-rtdb.firebaseio.com",
-            projectId: "watchout-84cc5",
-            storageBucket: "watchout-84cc5.appspot.com",
-            messagingSenderId: "73851933764",
-            appId: "1:73851933764:web:54b79f1c6137923196d811"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const storage = getStorage(app);
-
-        document.getElementById('watchForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Get form values
-            const watchName = document.getElementById('watchName').value;
-            const watchPrice = document.getElementById('watchPrice').value;
-            const watchSize = document.getElementById('watchSize').value;
-            const watchMaterial = document.getElementById('watchMaterial').value;
-            const watchDescription = document.getElementById('watchDescription').value;
-            const watchImage = document.getElementById('watchImage').files[0];
-
-            // Firebase database reference
-            const watchesRef = ref(db, 'watches');
-            const newWatchRef = push(watchesRef);
-
-            // Upload image to Firebase Storage
-            const storageReference = storageRef(storage, 'watch_images/' + watchImage.name);
-            const uploadTask = uploadBytes(storageReference, watchImage);
-
-            uploadTask.then(snapshot => {
-                getDownloadURL(snapshot.ref).then(downloadURL => {
-                    // Create the watch item in the database
-                    set(newWatchRef, {
-                        name: watchName,
-                        price: watchPrice,
-                        size: watchSize,
-                        material: watchMaterial,
-                        description: watchDescription,
-                        imageUrl: downloadURL
-                    });
-
-                    // Reset the form after successful submission
-                    document.getElementById('watchForm').reset();
-                    alert('Watch listing added successfully!');
-                });
-            }).catch(error => {
-                console.error('Error uploading image: ', error);
-            });
-        });
-
-        const auth = getAuth();
-        auth.onAuthStateChanged(function(user){
-            if(user){
-                document.getElementById("protected-content").style.display="block";
-            }else{
-                document.getElementById("protected-content").style.display="none";
-                window.location.href='SignIn.html'
-            }
-        });
-
-        function logout(){
-            signOut(auth).then(()=>{
-                alert("Logged out");
-                window.location.href="home.html";
-            }).catch((error)=>{
-                alert("Sign out error", error);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event)=>{
-            document.getElementById("log-out").addEventListener('click', logout);
-        });
-
-    </script>
+    <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./scripts/accountmanage.js"></script>
+    <script type="module" src="./scripts/addlistings.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
