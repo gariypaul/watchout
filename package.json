@@ -1,0 +1,27 @@
+{
+  "name": "watchout",
+  "version": "1.0.0",
+  "description": "package",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oucs3203group/watchout.git"
+  },
+  "keywords": [
+    "watch",
+    "out"
+  ],
+  "author": "oucs3203group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oucs3203group/watchout/issues"
+  },
+  "homepage": "https://github.com/oucs3203group/watchout#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "puppeteer": "^21.5.2"
+  }
+}
