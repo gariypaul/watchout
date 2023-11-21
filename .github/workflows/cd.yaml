@@ -1,0 +1,34 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main  # or your release branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t bilguunzayamj/watchout:latest .
+        echo ${{ secrets.MY_DOCKER_PASSWORD }} | docker login --username ${{ secrets.MY_DOCKER_USERNAME }} --password-stdin
+        docker push bilguunzayamj/watchout:latest
+
+    - name: Deploy to Google Cloud
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.MY_GCLOUD_HOST }}
+        username: ${{ secrets.MY_GCLOUD_USERNAME  }}
+        key: ${{ secrets.GCLOUD_SSH_KEY_ECDSA"}"} }}
+        script: |
+          sudo docker pull bilguunzayamj/watchout:latest
+          CONTAINER_ID=$(sudo docker ps -q --filter ancestor=bilguunzayamj/watchout:latest)
+          if [ "$CONTAINER_ID" ]; then
+            sudo docker stop $CONTAINER_ID
+            sudo docker rm $CONTAINER_ID
+          fi
+          sudo docker run -d -p 80:80 bilguunazyamj/watchout:latest
